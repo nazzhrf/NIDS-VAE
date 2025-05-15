@@ -1,0 +1,235 @@
+`timescale 1ns / 1ps
+
+module tb_forward_nn_classification_bram();
+    localparam T = 10;
+
+    // INPUT OUTPUT
+    
+    reg clk;
+    reg rst_n;
+    reg en;
+    reg clr;
+
+    wire ready;
+    reg start;
+    wire done;
+
+    reg xij_ena;
+    reg [3:0]  xij_addra;
+    reg [63:0] xij_dina;
+    reg [7:0]  xij_wea;  
+
+    reg wb_ena;
+    reg [3:0]  wb_addra;
+    reg [63:0] wb_dina;
+    reg [7:0]  wb_wea;       
+
+    reg xout_enb;
+    reg [3:0]   xout_addrb;
+    wire [15:0] xout_doutb;
+
+
+    forward_nn_classification_bram dut
+    (
+        .clk(clk),
+        .rst_n(rst_n),
+        .en(en),
+        .clr(clr),
+        .ready(ready),
+        .start(start),
+        .done(done),
+
+        .xij_ena(xij_ena),
+        .xij_addra(xij_addra),
+        .xij_dina(xij_dina),
+        .xij_wea(xij_wea),
+
+        .wb_ena(wb_ena),
+        .wb_addra(wb_addra),
+        .wb_dina(wb_dina),
+        .wb_wea(wb_wea),
+
+        .xout_enb(xout_enb),
+        .xout_addrb(xout_addrb),
+        .xout_doutb(xout_doutb)
+    );
+
+    always
+    begin
+        clk = 0;
+        #(T/2);
+        clk = 1;
+        #(T/2);
+    end
+    
+    initial
+    begin
+        en = 1;
+        clr = 0;
+        start = 0;
+
+        xij_ena = 1;
+        xij_addra = 0;
+        xij_dina = 0;
+        xij_wea = 0;
+
+        wb_ena = 1;
+        wb_addra = 0;
+        wb_dina = 0;
+        wb_wea = 0;
+
+        xout_enb = 0;
+        xout_addrb = 0;
+        
+        rst_n = 0;
+        #(T*1);
+        rst_n = 1;
+        
+        // *** Testvector 1 ***
+        // Write weight and bias
+
+        // CLOCK 1
+        xij_wea = 8'hff;
+        xij_addra = 0;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 0;
+        wb_dina = 64'h0316_0B57_03D1_01ED;
+
+        #T;  
+
+        // CLOCK 2
+        xij_wea = 8'hff;
+        xij_addra = 1;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 1;
+        wb_dina = 64'h0171__0B92__0378__05E9;
+
+        #T;
+
+        // CLOCK 3
+        xij_wea = 8'hff;
+        xij_addra = 2;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 2;
+        wb_dina = 64'h02A2__0C7B__0148__05FA;
+
+        #T;
+
+        // CLOCK 4
+        xij_wea = 8'hff;
+        xij_addra = 3;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 3;
+        wb_dina = 64'h02FF__09BA__0391__03DE;
+
+        #T;
+
+        // CLOCK 5
+        xij_wea = 8'hff;
+        xij_addra = 4;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 4;
+        wb_dina = 64'h0446__0BD5__00D0__030A;
+
+        #T;
+
+        // CLOCK 6
+        xij_wea = 8'hff;
+        xij_addra = 5;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 5;
+        wb_dina = 64'h00D8__0A1F__023C__01AF;
+
+        #T;
+
+        // CLOCK 7
+        xij_wea = 8'hff;
+        xij_addra = 6;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 6;
+        wb_dina = 64'h0325__0C89__0369__044A;
+
+        #T;
+
+        // CLOCK 8
+        xij_wea = 8'hff;
+        xij_addra = 7;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 7;
+        wb_dina = 64'h03CA__0DB2__021C__0416;
+
+        #T;
+
+        // CLOCK 9
+        xij_wea = 8'hff;
+        xij_addra = 8;
+        xij_dina = 64'h0394__038D__03F5__03CC;
+
+        wb_wea = 8'hff;
+        wb_addra = 8;
+        wb_dina = 64'h0123__0D03__014F__0406;
+
+        #T;
+
+        // CLOCK 10
+        wb_wea = 8'hff;
+        wb_addra = 9;
+        wb_dina = 64'hF1B3__CBC6__FE00__039D;
+
+        #T;
+
+        // CLOCK 11
+        wb_wea = 8'h00;
+        xij_ena = 0;
+        wb_ena = 0;
+
+        xij_wea = 8'd0;
+        xij_addra = 0;
+        xij_dina = 64'sb0;
+
+        wb_wea = 8'd0;
+        wb_addra = 8;
+        wb_dina = 64'sb0;
+
+        #T;
+
+        // CLOCK 12
+        start = 1;
+        #T
+
+        // ClOCK 13
+        start = 0;
+        #T;
+
+        #(T*30);
+
+        // Membaca hasilnya
+        xout_enb = 1 ;
+        xout_addrb = 0 ; #T;
+        xout_addrb = 1 ; #T;
+        xout_addrb = 2 ; #T;
+        xout_addrb = 3 ; #T;
+        xout_enb = 0 ;
+        #T
+
+        $stop;
+    end
+    
+endmodule
+
