@@ -1,5 +1,13 @@
 CIC-IDS/
 Paper/
-classifier/axis_forward_classifier_bram/
-classifier/axis_forward_classifier_bram_v2/
-classifier/top_forward_nn_classifier/
+Hardware/classifier/axis_forward_classifier_bram/
+Hardware/classifier/axis_forward_classifier_bram_v2/
+Hardware/classifier/top_forward_nn_classifier/
+Model/Modified_4type/
+Model/Modified_Dos-4/
+Model/Modified_Dos-Hulk/
+Model/Original/
+Model/Neuralnetwork_AE.m
+Model/Neuralnetwork_VAE.m
+Model/Neuralnetwork_forward_AE.m
+Model/Neuralnetwork_forward_VAE.m
