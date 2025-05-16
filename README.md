@@ -36,7 +36,7 @@ NIDS-VAE aims to **perform anomaly detection by classifying network traffic as e
     title="Fig 1. Neural Network Architecture" 
     alt="Alt text" 
     src="Images/nn_arc.jpg" 
-    width="300">
+    width="500">
 </div>
 
 The input fed into the VAE consists of integers ranging from 0 to 1.
@@ -53,10 +53,10 @@ The picture below gives simple ilustration about the software-hardware interacti
 
 <div style="text-align: center;">
   <img 
-    title="Fig 1. Neural Network Architecture" 
+    title="Fig 2. HW-SW interaction" 
     alt="Alt text" 
     src="Images/HW-SW.jpg" 
-    width="300">
+    width="500">
 </div>
 To see the details about the verilog architecture, you can see all the images start with "rtl" in images directory. 
 
