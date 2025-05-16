@@ -24,10 +24,14 @@ The data was collected by simulating network traffic activities. Under normal co
 ## Architecture of NIDS-VAE 
 
 ### Neural Network Architecture
-The LSI Design Contest 2025 provides reference architectures for two types of neural networks: Autoencoder (AE) and Variational Autoencoder (VAE). We already know that NIDS-VAE aims to **perform anomaly detection by classifying network traffic as either normal or malicious**, analogous to binary classification between healthy and infected conditions. To achieve this, we combine the AE and VAE architectures, as illustrated in the figure below.
+We already know that NIDS-VAE aims to **perform anomaly detection by classifying network traffic as either normal or malicious**, analogous to binary classification between healthy and infected conditions. To achieve this, we combine the AE and VAE architectures, as illustrated in the figure below.
 
-![Fig 1 Neural Network Architecture] (Images/nn_arc.jpg)
+<img title="Fig 1. Neural Network Architecture" alt="Alt text" src="Images/nn_arc.jpg">
 
 The input fed into the VAE consists of integers ranging from 0 to 1.
 The VAE is trained to reconstruct the input such that benign data is mapped to 0, while traffic associated with cyberattacks is reconstructed as 1. Then, the AE decore will act as classifier to determine wether the data is normal or malicious.
+
+### Software - Hardware Interaction
+
+
 
