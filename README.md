@@ -5,8 +5,6 @@ This project is intended as preparation for 2025 LSI Design Contest in Okinawa. 
 - [About the Project](#About-the-Project)
 - [A Brief About NIDS and The Dataset](#A-Brief-About-NIDS-and-The-Dataset)
 - [Architecture of NIDS-VAE](#Architecture-of-NIDS-VAE)
-- [Usage](#usage)
-- [License](#license)
 
 ## About the Project
 **NIDS-VAE** presents a **software-controlled hardware accelerator** implemented on a Zynq-7000 FPGA platform. The hardware architecture, including the Variational Autoencoder (VAE), is developed at the register-transfer level (RTL) and synthesized using Xilinx Vivado. The Zynq-7000 device integrates an ARM processor capable of running a Python kernel, which is utilized to perform data preprocessing and control the execution of hardware modules via FPGA overlays. This approach enables seamless integration between high-level software flow and low-level hardware acceleration, facilitating efficient deployment of machine learning models on reconfigurable systems.
@@ -48,6 +46,7 @@ The Python script act as an controller and is executed on the Python kernel runn
 - Stores input and output data in the DDR memory of the Zynq FPGA.
 - Sends input data to the FPGA logic slices via an Overlay. The input from DDR memory must pass through several communication protocols : the AMBA Bus, the AXI Interconnect, and lastly AXI DMA, before reaching the implemented Verilog logic.
 - Stores the resulting output back into the DDR memory.
+- Do postprocess to the results, including metrics calculation.
 
 The picture below gives simple ilustration about the software-hardware interaction:
 
@@ -59,5 +58,3 @@ The picture below gives simple ilustration about the software-hardware interacti
     width="500">
 </div>
 To see the details about the verilog architecture, you can see all the images start with "rtl" in images directory. 
-
-## Repo Structure 
